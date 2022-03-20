@@ -12,7 +12,7 @@ export const bookApi = createApi({
             query: (bookid)=>`books/${bookid}`
         }),
         searchBook: builder.query({
-            query: (book)=> `books?search=${book}`
+            query: ({book, searchPage})=> `books/?page=${searchPage}&search=${book}`,
         }),
     }),
 })

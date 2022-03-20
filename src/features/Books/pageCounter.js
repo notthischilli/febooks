@@ -19,7 +19,7 @@ export const pageCounterSlice = createSlice({
         },
         resetCount:(state)=>{
             state.currentPage = 1
-        }
+        },
     }
 });
 

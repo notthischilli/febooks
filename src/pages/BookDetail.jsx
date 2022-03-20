@@ -28,20 +28,20 @@ function BookDetail() {
                     }
                 </div>
                 <div className="bookdetail-info">
-                    <p className="book-box">{data.title}</p>
+                    <p className="book-box"> <span style={{fontWeight:'bold'}}>{data.title}</span> </p>
                     {data.authors[0] ?
-                        <p className='author-box'> {data.authors[0].name}</p>
+                        <p className='author-box'><span style={{fontWeight:'bold'}}>Author:</span> {data.authors[0].name}</p>
                         :
                         ''
                     }  
                     {data.languages[0] ?
-                        <p className='author-box'>Language: {data.languages[0]}</p>
+                        <p className='author-box'><span style={{fontWeight:'bold'}}>Language:</span> {data.languages[0]}</p>
                         :
                         ''
                     }  
                     {data.subjects?
                         <div className='tag-box'>
-                            Tags: 
+                            <span style={{fontWeight:'bold'}}>Tags:</span> 
                             { data.subjects.map(tag=>{
                                 return  <p className='author-box'>{tag}</p>
                             })}
@@ -55,7 +55,7 @@ function BookDetail() {
             </div>
             <div className="bookdetail-bottom-box">
                     <div className='bookdetail-links'>
-                        <ul> 
+                        <ul className='bookdetail-link-style'> 
                             {data.formats["application/zip"] &&
                             <li>
                                 <a href={data.formats["application/zip"]}>  Download ZIP file</a>

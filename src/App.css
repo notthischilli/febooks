@@ -107,9 +107,22 @@ img.img-box{
   /* max-height: 150px;
   overflow-y: scroll; */
 }
+.bookdetail-link-style{
+  font-weight: bold;
+}
+.bookdetail-link-style a{
+  text-decoration: none;
+  color: #0B8AFF;
+}
+.bookdetail-link-style a:hover{
+  color: blue;
+}
 
 a.book-link{
   text-decoration: none;
+}
+a.book-link:hover{
+  color: blue;
 }
 
 .id-box{
@@ -267,3 +280,24 @@ button.close-form-result-box:hover{
     transform: rotate(360deg);
   }
 }
+
+
+@media only screen and (max-device-width : 1024px) {
+  /* Styles */
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 100vw;
+  }
+
+  .bookdetail-top-box{
+    flex-direction: column;
+  }
+
+  .book-container{
+    overflow-y: scroll;
+  }
+
+  }
