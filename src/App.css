@@ -1,39 +1,269 @@
-.App {
-  text-align: center;
+body{
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow-y: hidden;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+ul{
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
-.App-header {
-  min-height: 100vh;
+.container{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex: 1;
+  max-width: 40vw;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.form-container{
+  padding: 30px 0px;
 }
 
-@keyframes App-logo-float {
+.book-container{
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  max-height: 90vh;
+}
+
+.books-list{
+  max-height: 88%;
+  overflow-y: scroll;
+  padding: 15px 30px 15px 50px;
+  border: 1px solid #D1D1D1;
+}
+
+.pagenumber-display{
+  padding: 10px;
+}
+
+.bookdetail-box{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px 15px 50px;
+  border: 1px solid #D1D1D1;
+}
+
+.bookdetail-top-box{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px dotted gray;
+  padding: 20px 0;
+}
+.bookdetail-top-box .bookdetail-img{
+  flex: 1;
+}
+.bookdetail-top-box .bookdetail-info{
+  flex: 1;
+  margin-left: 5%;
+}
+
+.bookdetailmargin{
+  margin-top: 10%;
+}
+
+.bookdetail-bottom-box{
+  display: flex;
+  flex: 1;
+}
+
+.bookdetail-links{
+  padding: 20px 0;
+}
+.bookdetail-links ul li{
+  margin: 30px 0;
+}
+
+.bookdetail-bottom-box ul{
+  list-style: none;
+}
+
+.book-item{
+  padding: 5px 0;
+  border-bottom: 1px dashed;
+}
+
+img.img-box{
+  margin-top: 27px;
+}
+
+.tag-box{
+  /* max-height: 150px;
+  overflow-y: scroll; */
+}
+
+a.book-link{
+  text-decoration: none;
+}
+
+.id-box{
+  font-size: 20px;
+  color: orchid;
+  margin-right: 10px;
+}
+
+.book-box{
+  font-size: 20px;
+}
+
+.author-box{
+  font-size: 14px;
+  font-style: italic;
+}
+
+input{
+  height: 30px;
+  padding-left: 10px;
+  width: 78%;
+  border: 1px solid #949494;
+}
+
+button.btn-submit{
+  padding: 8px 0px;
+  width: 18%;
+  border-radius: 0%;
+  outline: none;
+  border: 1px solid #949494;
+  background-color: #000000;
+  color: #fff;
+  cursor: pointer;
+}
+button.btn-submit:hover{
+  color: #0B8AFF;
+}
+
+.search-result-box{
+  position: relative;
+  max-height: 85vh;
+  min-height: auto;
+  overflow-y: scroll;
+  padding: 15px 30px 15px 50px;
+  border: 1px solid #0B8AFF;
+  margin-top: 15px;
+}
+
+button.close-form-result-box{
+  position: fixed;
+  left: 66%;
+  font-weight: bolder;
+  color: red;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid gray;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 5px 8px;
+}
+button.close-form-result-box:hover{
+  opacity: 1;
+}
+
+.nav-btn-box{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-btn-box button{
+  padding: 7px 18px;
+  margin-right: 5px;
+}
+
+
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  color: blue;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
   0% {
-    transform: translateY(0);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-  50% {
-    transform: translateY(10px);
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
   }
   100% {
-    transform: translateY(0px);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
