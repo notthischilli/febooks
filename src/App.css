@@ -384,4 +384,8 @@ button.close-form-result-box:hover{
     left: 90%;
   }
 
+  body {
+    overflow-y: visible;
+}
+
   }
