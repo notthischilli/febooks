@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import BookForm from '../components/BookForm';
 import { useGetBookDetailQuery } from '../features/Books/bookApi';
+import { FaAngleLeft,  } from 'react-icons/fa';
 
 function BookDetail() {
     let params = useParams();
@@ -11,13 +13,21 @@ function BookDetail() {
     if(isLoading){
         return <div className="loader">Loading...</div>
     }
+    if(error){
+        toast.error(error);
+        return <div>Error...</div>
+    }
 
     return (
-        <div className='book-container bookdetailmargin'> 
-        <Link className='nav-home' to='/'>Go back</Link>
+        <div className='bookdetail-container'> 
+        <Link className='nav-home' to='/'>
+            <div className='nav-home-box'>
+                 <FaAngleLeft /> <span className='nav-home-text'>Go back</span> 
+            </div>
+        </Link>
 
         <div className="bookdetail-box">
-            {error && <div>Error ...</div>}
+            {error && toast(error)}
 
             <div className="bookdetail-top-box">
                 <div className="bookdetail-img">

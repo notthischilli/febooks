@@ -3,6 +3,8 @@ import { useGetAllBooksQuery } from '../features/Books/bookApi';
 import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
 import { decreaseCount, increaseCount } from '../features/Books/pageCounter';
+import { toast } from 'react-toastify';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 function Books() {
     
@@ -16,6 +18,11 @@ function Books() {
 
     useEffect(()=>{
         setPage(currentPage);
+
+        if(error){
+            toast.error(error)
+        }
+
     },[currentPage])
 
     if(isLoading){
@@ -23,7 +30,7 @@ function Books() {
     }
     return (
         <div className='book-container'>
-            {error && <div>error ...</div>}
+            {error &&  <div>Error...</div>}
         
             <div className="books-list">
                   {isFetching && <div className="loader">Loading...</div>}
@@ -48,17 +55,17 @@ function Books() {
             
             <div className='nav-btn-box'>
                {data.previous ?
-                <button className="prev" onClick={()=>{dispatch(decreaseCount())}}>Prev</button>
+                <button className="prev" onClick={()=>{dispatch(decreaseCount())}}><FaAngleLeft/>Prev</button>
                 :
-                <button className="prev" disabled>Prev</button>
+                <button className="prev" disabled><FaAngleLeft/>Prev</button>
                 }
                 <span className='pagenumber-display'>
                     {currentPage}
                 </span>
                 {data.next ?
-                <button className="next" onClick={()=>{dispatch(increaseCount())}}>Next</button>
+                <button className="next" onClick={()=>{dispatch(increaseCount())}}>Next <FaAngleRight/></button>
                 :
-                <button className="next" disabled>Next</button>
+                <button className="next" style={{border: '2px solid gray !important'}} disabled>Next <FaAngleRight/></button>
                 }
              
             </div>

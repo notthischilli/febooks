@@ -1,12 +1,14 @@
 import React, {useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useSearchBookQuery } from '../features/Books/bookApi';
-// import {setSearchTerm, searchIncreaseCount, searchDecreaseCount, searchResetCount} from '../features/Books/searchPageCounter';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+// import {searchIncreaseCount, searchDecreaseCount, searchResetCount} from '../features/Books/searchPageCounter';
 
 function BookForm() {
 
-    // const {currentSearchPage, searchTerm} = useSelector(state => state.searchPageCounter)
+    // const {currentPage} = useSelector(state => state.searchBookContext)
     // const dispatch = useDispatch();
 
     const [book, setBook] = useState('');
@@ -20,26 +22,32 @@ function BookForm() {
         // search book code here
         e.preventDefault();
         if(book){
-            // dispatch(setSearchTerm(book));
             setSkip(false);
             setShowSearch(true);
         }
-        
+
     }
 
     const clearResultBox = ()=>{
-        // dispatch(searchResetCount())
         setShowSearch(false);
         setBook('');
+        setSearchPage(1);
     }
 
     useEffect(()=>{
+
+
         if(book.length == null || book.length === 0){
           setShowSearch(false);
+          setSearchPage(1);
         //   dispatch(searchResetCount());
         }
-       
-    },[book,])
+
+        if(error){
+            toast.error(error)
+        }
+
+    },[book])
 
 
   return (
@@ -50,48 +58,69 @@ function BookForm() {
              onChange={(e)=>{setBook(e.target.value); setSkip(true)}}/>
             <button className='btn-submit' type="submit">Search</button>
         </form>
-        {error && 
-            ( <div>error...</div> )
+        {error &&
+           <div>Error...</div>
         }
          {isError && 
-            ( <div>isError...</div> )
+           <div>Error...</div>
         }
         {isFetching && (<div className="loader">Loading...</div>)}
         {(data && showSearch) &&
-             (<div className='search-result-box'> 
-                <button onClick={clearResultBox} className='close-form-result-box'>X</button>
-                 {(data.count === 0) && <div>No result found </div>}
-                 {
-                 data.results.map((book)=>{
-                     return(
-                         <div className='book-item'>
-                             <Link className='book-link' to={`bookdetail/${book.id}`} key={book.id}>
-                                <p className='book-box'> <span className="id-box">{book.id}</span>  {book.title.substring(0, 50)}</p>
-                                {book.authors[0] ?
-                                    <p className='author-box'> {book.authors[0].name}</p>
-                                    :
-                                    ''
-                                }                
-                            </Link>
-                         </div>
+             (<div className='search-box'> 
+                <div className="search-result-info-box">
+                    <div className="search-result-message">
+                    {(data.count === 0) ? 
+                        <div> <p className='search-result-info-text'>NO RESULTS FOUND</p> </div>
+                        :
+                        <p className='search-result-info-text'>{data.count} RESULTS FOUND</p>
+                    }
                         
-                     ) 
-                 })}  
+                    </div>
+                    <div className="search-result-nox-action">
+                        <button onClick={clearResultBox} className='close-form-result-box'>X</button>
+                    </div>
+                </div>
+                
+               
+                 {
+                (data.results.length >0) ?
+                    (<div className='search-result-box'>
+                    {
+                       data.results.map((book)=>{
+                            return(
+                                <div className='book-item'>
+                                    <Link className='book-link' to={`bookdetail/${book.id}`} key={book.id}>
+                                        <p className='book-box'> <span className="id-box">{book.id}</span>  {book.title.substring(0, 50)}</p>
+                                        {book.authors[0] ?
+                                            <p className='author-box'> {book.authors[0].name}</p>
+                                            :
+                                            ''
+                                        }                
+                                    </Link>
+                                </div>
+                                
+                            ) 
+                        }) 
+                    }
+                </div>)
+                :
+                ''
+                 }  
                  {
                      data.next &&
                      <div className='nav-btn-box'>
                      {data.previous ?
-                      <button className="prev" onClick={()=>{ setSearchPage(searchPage-1) }}>Prev</button>
+                      <button className="prev" onClick={()=>{ setSearchPage(searchPage-1) }}><FaAngleLeft/>Prev</button>
                       :
-                      <button className="prev" disabled>Prev</button>
+                      <button className="prev" disabled><FaAngleLeft/>Prev</button>
                       }
                       <span className='pagenumber-display'>
                           {searchPage}
                       </span>
                       {data.next ?
-                      <button className="next" onClick={()=>{ setSearchPage(searchPage+1)}}>Next</button>
+                      <button className="next" onClick={()=>{ setSearchPage(searchPage+1) }}>Next<FaAngleRight/></button>
                       :
-                      <button className="next" disabled>Next</button>
+                      <button className="next" disabled>Next<FaAngleRight/></button>
                       }
                    
                   </div>

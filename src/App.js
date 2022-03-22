@@ -9,6 +9,9 @@ import {
 import Home from './pages/Home';
 import BookDetail from './pages/BookDetail';
 
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <div className="container">
@@ -18,6 +21,17 @@ function App() {
             <Route path={`/bookdetail/:bookid`} element={<BookDetail/>} />
           </Routes>
         </BrowserRouter>,
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          // newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
     </div>
   );
 }
